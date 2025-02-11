@@ -29,32 +29,39 @@ namespace Practica1
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            string textoNombre = txtNombre.Text;
-            string textoTelefono = txtTelefono.Text;
-            string textoCorreo = txtCorreoElectronico.Text;
-
-            DialogResult result = MessageBox.Show("¿Estás seguro de qué deseas guardar a este contacto?", "Guardar contacto", MessageBoxButtons.YesNo);
-
-            if (result == DialogResult.Yes)
+            if (string.IsNullOrWhiteSpace(txtNombre.Text) || string.IsNullOrWhiteSpace(txtTelefono.Text) || string.IsNullOrWhiteSpace(txtCorreoElectronico.Text))
             {
-                string blocContactos = Path.Combine(Application.StartupPath, "Contactos.txt");
-                string linea = "Nombre del contacto: " + textoNombre + ", Número de teléfono: " + textoTelefono + ", Correo Electrónico: " + textoCorreo;
-
-                using (StreamWriter sw = new StreamWriter(blocContactos, true, Encoding.UTF8))
-                {
-                    sw.WriteLine(linea);
-                }
-
-                DatosGuardados?.Invoke();
-
-                MessageBox.Show("Datos guardados correctamente");
-                txtCorreoElectronico.Clear();
-                txtTelefono.Clear();
-                txtNombre.Clear();
+                MessageBox.Show("Es obligatorio rellenar todos los campos");
             }
             else
             {
-                MessageBox.Show("Los datos no fueron guardados");
+                string textoNombre = txtNombre.Text;
+                string textoTelefono = txtTelefono.Text;
+                string textoCorreo = txtCorreoElectronico.Text;
+
+                DialogResult result = MessageBox.Show("¿Estás seguro de qué deseas guardar a este contacto?", "Guardar contacto", MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
+                {
+                    string blocContactos = Path.Combine(Application.StartupPath, "Contactos.txt");
+                    string linea = "Nombre del contacto: " + textoNombre + ", Número de teléfono: " + textoTelefono + ", Correo Electrónico: " + textoCorreo;
+
+                    using (StreamWriter sw = new StreamWriter(blocContactos, true, Encoding.UTF8))
+                    {
+                        sw.WriteLine(linea);
+                    }
+
+                    DatosGuardados?.Invoke();
+
+                    MessageBox.Show("Datos guardados correctamente");
+                    txtCorreoElectronico.Clear();
+                    txtTelefono.Clear();
+                    txtNombre.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Los datos no fueron guardados");
+                }
             }
         }
     }
