@@ -23,7 +23,7 @@ namespace Practica1
                 listBox1.Items.Clear();
                 foreach (var linea in lineas)
                 {
-                    listBox1.Items.Add(linea); // Agregar cada línea como un ítem en el ListBox
+                    listBox1.Items.Add(linea);
                 }
             }
             else

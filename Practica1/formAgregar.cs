@@ -29,7 +29,8 @@ namespace Practica1
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtNombre.Text) || string.IsNullOrWhiteSpace(txtTelefono.Text) || string.IsNullOrWhiteSpace(txtCorreoElectronico.Text))
+            if (string.IsNullOrWhiteSpace(txtNombre.Text) || string.IsNullOrWhiteSpace(txtTelefono.Text) 
+                || string.IsNullOrWhiteSpace(txtCorreoElectronico.Text))
             {
                 MessageBox.Show("Es obligatorio rellenar todos los campos");
             }
@@ -39,12 +40,14 @@ namespace Practica1
                 string textoTelefono = txtTelefono.Text;
                 string textoCorreo = txtCorreoElectronico.Text;
 
-                DialogResult result = MessageBox.Show("¿Estás seguro de qué deseas guardar a este contacto?", "Guardar contacto", MessageBoxButtons.YesNo);
+                DialogResult result = MessageBox.Show("¿Estás seguro de qué deseas " +
+                    "guardar a este contacto?", "Guardar contacto", MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.Yes)
                 {
                     string blocContactos = Path.Combine(Application.StartupPath, "Contactos.txt");
-                    string linea = "Nombre del contacto: " + textoNombre + ", Número de teléfono: " + textoTelefono + ", Correo Electrónico: " + textoCorreo;
+                    string linea = "Nombre del contacto: " + textoNombre + ", Número de teléfono: " 
+                        + textoTelefono + ", Correo Electrónico: " + textoCorreo;
 
                     using (StreamWriter sw = new StreamWriter(blocContactos, true, Encoding.UTF8))
                     {
